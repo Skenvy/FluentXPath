@@ -1,6 +1,6 @@
 package com.skenvy.fluent;
 
-public interface BuildableSelector {
+public interface BuildableContext {
 
 	String buildToString();
 	

@@ -12,8 +12,9 @@ public class XPathBuilderTest {
 
 	@Test
 	public void testXPathBuilder() {
-		XPathBuilder xpb = XPathBuilder.startFromAnyNode();
+		XPathBuilder xpb = XPathBuilder.start().fromAnyNode().nodeOfAnyType().withChild();
 		Assert.assertNotNull(xpb);
+		System.out.println(XPathBuilder.start().fromAnyNode().nodeOfAnyType().withChild().nodeOfType("div").buildToString());
 	}
 
 }

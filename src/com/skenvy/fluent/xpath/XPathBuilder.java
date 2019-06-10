@@ -12,13 +12,12 @@ public class XPathBuilder {
 	/*Package Private*/
 	final XPathBuilder xPathBuilder;
 
-	/*Package Private*/
+	private XPathInitialiser initialiser;
+	
 	private XPathAxisContext axisContext;
 
-	/*Package Private*/
 	private XPathNodeContext nodeContext;
 
-	/*Package Private*/
 	private XPathPredicateContext predicateContext;
 	
 	/*Package Private*/
@@ -37,6 +36,13 @@ public class XPathBuilder {
 	XPathBuilder(XPathBuilder xPathBuilder){
 		this.stringBuilder = xPathBuilder.stringBuilder;
 		this.xPathBuilder  = xPathBuilder;
+	}
+	
+	private XPathInitialiser getInitialiser() {
+		if(this.initialiser == null) {
+			this.initialiser = new XPathInitialiser(this);
+		}
+		return this.initialiser;
 	}
 	
 	/*Package Private*/
@@ -63,40 +69,36 @@ public class XPathBuilder {
 		return this.predicateContext;
 	}
 	
-	public static XPathAxisContext startFromAnyNode() {
-		return new XPathBuilder("//").getAxisContext();
+	/*Package Private*/
+	XPathAxisContext swapToAxisContext() {
+		return this.xPathBuilder.getAxisContext();
 	}
 	
-	public static XPathAxisContext startFromTheRootNode() {
-		return new XPathBuilder("/").getAxisContext();
+	/*Package Private*/
+	XPathNodeContext swapToNodeContext() {
+		return this.xPathBuilder.getNodeContext();
 	}
 	
-	public static XPathAxisContext startFromTheCurrentContextNode() {
-		return new XPathBuilder().getAxisContext();
+	/*Package Private*/
+	XPathPredicateContext swapToPredicateContext() {
+		return this.xPathBuilder.getPredicateContext();
 	}
 	
-	public static XPathNodeContext startFromAnyNodeOfSpecificNodeType(String nodeType) {
-		return new XPathBuilder("//"+nodeType).getNodeContext();
+	/*Package Private*/
+	String buildTheStringBuilder() {
+		return this.stringBuilder.toString();
 	}
 	
-	public static XPathNodeContext startFromTheRootNodeOfSpecificNodeType(String nodeType) {
-		return new XPathBuilder("/"+nodeType).getNodeContext();
+	/*Package Private*/
+	<S extends CharSequence> void addSequenceToTheStringBuilder(S s) {
+		this.stringBuilder.append(s);
 	}
 	
-	public static XPathNodeContext startFromTheCurrentContextNodeOfSpecificNodeType(String nodeType) {
-		return new XPathBuilder(nodeType).getNodeContext();
-	}
+	//TODO Swap to invoking the initialiser first to stop later calls to "start"
 	
-	public static XPathNodeContext startFromAnyNodeOfAnyNodeType() {
-		return new XPathBuilder("//*").getNodeContext();
-	}
-	
-	public static XPathNodeContext startFromTheRootNodeOfAnyNodeType() {
-		return new XPathBuilder("/*").getNodeContext();
-	}
-	
-	public static XPathNodeContext startFromTheCurrentContextNodeOfAnyNodeType() {
-		return new XPathBuilder("*").getNodeContext();
+	/*Package Private*/
+	public static XPathInitialiser start() {
+		return (new XPathBuilder()).getInitialiser();
 	}
 
 }
