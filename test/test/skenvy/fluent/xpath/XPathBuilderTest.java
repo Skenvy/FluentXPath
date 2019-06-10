@@ -12,14 +12,7 @@ public class XPathBuilderTest {
 
 	@Test
 	public void testXPathBuilder() {
-		XPathBuilder xpb = new XPathBuilder();
-		Assert.assertNotNull(xpb);
-	}
-
-	@Test
-	public void testXPathBuilderS() {
-		//TODO add validation testing on the string actually being a legitimate xpath
-		XPathBuilder xpb = new XPathBuilder("Some string");
+		XPathBuilder xpb = XPathBuilder.startFromAnyNode();
 		Assert.assertNotNull(xpb);
 	}
 
