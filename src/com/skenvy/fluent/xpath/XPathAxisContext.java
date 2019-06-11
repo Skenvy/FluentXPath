@@ -4,7 +4,7 @@ import com.skenvy.fluent.NotBuildableContext;
 
 public class XPathAxisContext extends XPathBuilder implements NotBuildableContext, XPathNodeContextualisers {
 
-	public XPathAxisContext(XPathBuilder xPathBuilder) {
+	/*Package Private*/ XPathAxisContext(XPathBuilder xPathBuilder) {
 		super(xPathBuilder);
 	}
 
@@ -15,13 +15,13 @@ public class XPathAxisContext extends XPathBuilder implements NotBuildableContex
 
 	@Override
 	public XPathNodeContext nodeOfAnyType() {
-		addSequenceToTheStringBuilder(XPathNodeContextualisers.nodeWildcard);
+		appendTheStringBuilder(XPathNodeContextualisers.nodeWildcard);
 		return swapToNodeContext();
 	}
 
 	@Override
 	public XPathNodeContext nodeOfType(String nodeType) {
-		addSequenceToTheStringBuilder(nodeType);
+		appendTheStringBuilder(nodeType);
 		return swapToNodeContext();
 	}
 

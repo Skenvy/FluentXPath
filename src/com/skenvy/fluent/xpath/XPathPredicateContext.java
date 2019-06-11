@@ -4,13 +4,13 @@ import com.skenvy.fluent.BuildableContext;
 
 public class XPathPredicateContext extends XPathBuilder implements BuildableContext, XPathAxisContextualisers, XPathPredicateContextualisers {
 
-	public XPathPredicateContext(XPathBuilder xPathBuilder) {
+	/*Package Private*/ XPathPredicateContext(XPathBuilder xPathBuilder) {
 		super(xPathBuilder);
 	}
 
 	@Override
 	public String buildToString() {
-		return this.stringBuilder.toString();
+		return this.buildTheStringBuilder();
 	}
 
 	@Override

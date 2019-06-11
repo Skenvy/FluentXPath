@@ -4,90 +4,90 @@ import com.skenvy.fluent.BuildableContext;
 
 public class XPathNodeContext extends XPathBuilder implements BuildableContext, XPathAxisContextualisers, XPathPredicateContextualisers {
 
-	public XPathNodeContext(XPathBuilder xPathBuilder) {
+	/*Package Private*/ XPathNodeContext(XPathBuilder xPathBuilder) {
 		super(xPathBuilder);
 	}
 
 	@Override
 	public String buildToString() {
-		return this.stringBuilder.toString();
+		return this.buildTheStringBuilder();
 	}
 
 	@Override
 	public XPathAxisContext withAncestor() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.ancestor);
+		appendTheStringBuilder(XPathAxisContextualisers.ancestor);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withAncestorOrSelf() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.ancestorOrSelf);
+		appendTheStringBuilder(XPathAxisContextualisers.ancestorOrSelf);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withChild() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.child);
+		appendTheStringBuilder(XPathAxisContextualisers.child);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withDescendant() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.descendant);
+		appendTheStringBuilder(XPathAxisContextualisers.descendant);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withDescendantOrSelf() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.descendantOrSelf);
+		appendTheStringBuilder(XPathAxisContextualisers.descendantOrSelf);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withFollowing() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.following);
+		appendTheStringBuilder(XPathAxisContextualisers.following);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withFollowingSibling() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.followingSibling);
+		appendTheStringBuilder(XPathAxisContextualisers.followingSibling);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withNamespace() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.namespace);
+		appendTheStringBuilder(XPathAxisContextualisers.namespace);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withPreceding() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.preceding);
+		appendTheStringBuilder(XPathAxisContextualisers.preceding);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withPrecedingSibling() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.precedingSibling);
+		appendTheStringBuilder(XPathAxisContextualisers.precedingSibling);
 		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathNodeContext withParent() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.parent);
+		appendTheStringBuilder(XPathAxisContextualisers.parent);
 		return swapToNodeContext();
 	}
 
 	@Override
 	public XPathNodeContext withSelf() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.self);
+		appendTheStringBuilder(XPathAxisContextualisers.self);
 		return swapToNodeContext();
 	}
 
 	@Override
 	public XPathAxisContext withAttribute() {
-		addSequenceToTheStringBuilder(XPathAxisContextualisers.attribute);
+		appendTheStringBuilder(XPathAxisContextualisers.attribute);
 		return swapToAxisContext();
 	}
 

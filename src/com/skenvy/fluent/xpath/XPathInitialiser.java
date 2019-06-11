@@ -2,52 +2,56 @@ package com.skenvy.fluent.xpath;
 
 public class XPathInitialiser extends XPathBuilder {
 
-	public XPathInitialiser(XPathBuilder xPathBuilder) {
-		super(xPathBuilder);
+	private XPathInitialiser() {
+		super();
 	}
 	
-	public XPathAxisContext fromAnyNode() {
-		addSequenceToTheStringBuilder("//");
-		return swapToAxisContext();
+	private XPathInitialiser(CharSequence chars) {
+		super(chars);
 	}
 	
-	public XPathAxisContext fromTheRootNode() {
-		addSequenceToTheStringBuilder("/");
-		return swapToAxisContext();
+	private static XPathInitialiser initialiseBuilder() {
+		return (new XPathInitialiser());
 	}
 	
-	public XPathAxisContext fromTheCurrentContextNode() {
-		return swapToAxisContext();
+	private static XPathInitialiser initialiseBuilder(CharSequence chars) {
+		return (new XPathInitialiser(chars));
 	}
 	
-	public XPathNodeContext fromAnyNodeOfSpecificNodeType(String nodeType) {
-		addSequenceToTheStringBuilder("//"+nodeType);
-		return swapToNodeContext();
+	public static XPathAxisContext fromAnyNode() {
+		return initialiseBuilder("//").swapToAxisContext();
 	}
 	
-	public XPathNodeContext fromTheRootNodeOfSpecificNodeType(String nodeType) {
-		addSequenceToTheStringBuilder("/"+nodeType);
-		return swapToNodeContext();
+	public static XPathAxisContext fromTheRootNode() {
+		return initialiseBuilder("/").swapToAxisContext();
 	}
 	
-	public XPathNodeContext fromTheCurrentContextNodeOfSpecificNodeType(String nodeType) {
-		addSequenceToTheStringBuilder(nodeType);
-		return swapToNodeContext();
+	public static XPathAxisContext fromTheCurrentContextNode() {
+		return initialiseBuilder().swapToAxisContext();
 	}
 	
-	public XPathNodeContext fromAnyNodeOfAnyNodeType() {
-		addSequenceToTheStringBuilder("//*");
-		return swapToNodeContext();
+	public static XPathNodeContext fromAnyNodeOfSpecificNodeType(String nodeType) {
+		return initialiseBuilder("//"+nodeType).swapToNodeContext();
 	}
 	
-	public XPathNodeContext fromTheRootNodeOfAnyNodeType() {
-		addSequenceToTheStringBuilder("/*");
-		return swapToNodeContext();
+	public static XPathNodeContext fromTheRootNodeOfSpecificNodeType(String nodeType) {
+		return initialiseBuilder("/"+nodeType).swapToNodeContext();
 	}
 	
-	public XPathNodeContext fromTheCurrentContextNodeOfAnyNodeType() {
-		addSequenceToTheStringBuilder("*");
-		return swapToNodeContext();
+	public static XPathNodeContext fromTheCurrentContextNodeOfSpecificNodeType(String nodeType) {
+		return initialiseBuilder(nodeType).swapToNodeContext();
+	}
+	
+	public static XPathNodeContext fromAnyNodeOfAnyNodeType() {
+		return initialiseBuilder("//*").swapToNodeContext();
+	}
+	
+	public static XPathNodeContext fromTheRootNodeOfAnyNodeType() {
+		return initialiseBuilder("/*").swapToNodeContext();
+	}
+	
+	public static XPathNodeContext fromTheCurrentContextNodeOfAnyNodeType() {
+		return initialiseBuilder("*").swapToNodeContext();
 	}
 
 }
