@@ -1,6 +1,7 @@
-package com.skenvy.fluent.xpath;
+package com.skenvy.fluent.xpath.external;
 
 import com.skenvy.fluent.NotBuildableContext;
+import com.skenvy.fluent.xpath.external.contextualisers.XPathNodeContextualisers;
 
 public class XPathAxisContext extends XPathBuilder implements NotBuildableContext, XPathNodeContextualisers {
 

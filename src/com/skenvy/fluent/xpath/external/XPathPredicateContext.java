@@ -1,9 +1,11 @@
-package com.skenvy.fluent.xpath;
+package com.skenvy.fluent.xpath.external;
 
 import com.skenvy.fluent.BuildableContext;
+import com.skenvy.fluent.xpath.external.contextualisers.XPathAxisContextualisers;
+import com.skenvy.fluent.xpath.external.contextualisers.XPathPredicateContextualisers;
 
 public class XPathPredicateContext extends XPathBuilder implements BuildableContext, XPathAxisContextualisers, XPathPredicateContextualisers {
-
+	
 	/*Package Private*/ XPathPredicateContext(XPathBuilder xPathBuilder) {
 		super(xPathBuilder);
 	}

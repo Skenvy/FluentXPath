@@ -1,4 +1,6 @@
-package com.skenvy.fluent.xpath;
+package com.skenvy.fluent.xpath.external.contextualisers;
+
+import com.skenvy.fluent.xpath.external.XPathNodeContext;
 
 /***
  * A collection of methods that will either result in an XPathNodeContext, or

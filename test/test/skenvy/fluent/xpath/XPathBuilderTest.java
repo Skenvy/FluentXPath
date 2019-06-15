@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.skenvy.fluent.xpath.XPathBuilder;
-import com.skenvy.fluent.xpath.XPathInitialiser;
+import com.skenvy.fluent.xpath.external.XPathBuilder;
+import com.skenvy.fluent.xpath.external.XPathInitialiser;
 
 import junit.framework.Assert;
 
