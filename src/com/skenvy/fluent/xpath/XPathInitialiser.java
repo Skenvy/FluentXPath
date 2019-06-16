@@ -1,4 +1,4 @@
-package com.skenvy.fluent.xpath.external;
+package com.skenvy.fluent.xpath;
 
 public class XPathInitialiser extends XPathBuilder {
 

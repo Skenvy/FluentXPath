@@ -1,4 +1,4 @@
-package com.skenvy.fluent.xpath.external.contextualisers;
+package com.skenvy.fluent.xpath.contextualisers;
 
 /***
  * A collection of methods that will either result in an XPathPredicateContext,

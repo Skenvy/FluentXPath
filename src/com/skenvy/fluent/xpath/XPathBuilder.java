@@ -1,4 +1,4 @@
-package com.skenvy.fluent.xpath.external;
+package com.skenvy.fluent.xpath;
 
 /***
  * The contextless builder. Subclassed by the "context aware" builder facades.
