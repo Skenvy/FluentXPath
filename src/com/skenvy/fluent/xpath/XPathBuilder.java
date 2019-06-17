@@ -71,6 +71,11 @@ public abstract class XPathBuilder {
 	private XPathPredicateContext predicateContext;
 	
 	/***
+	 * Context class instance: The "attribute" context
+	 */
+	private XPathAttributeContext attributeContext;
+	
+	/***
 	 * Construct a new instance with a new inner class and self reference.
 	 */
 	/*Package Private*/ XPathBuilder() {
@@ -128,6 +133,17 @@ public abstract class XPathBuilder {
 		}
 		return this.predicateContext;
 	}
+	
+	/***
+	 * Context class getters:  The "attribute" context class
+	 * @return XPathAttributeContext
+	 */
+	private XPathAttributeContext getAttributeContext() {
+		if(this.attributeContext == null) {
+			this.attributeContext = new XPathAttributeContext(this);
+		}
+		return this.attributeContext;
+	}
 
 	/***
 	 * Context class swappers:  The "axis" context class
@@ -151,6 +167,14 @@ public abstract class XPathBuilder {
 	 */
 	/*Package Private*/ XPathPredicateContext swapToPredicateContext() {
 		return this.xPathBuilder.getPredicateContext();
+	}
+	
+	/***
+	 * Context class swappers:  The "attribute" context class
+	 * @return XPathPredicateContext
+	 */
+	/*Package Private*/ XPathAttributeContext swapToAttributeContext() {
+		return this.xPathBuilder.getAttributeContext();
 	}
 
 	/***

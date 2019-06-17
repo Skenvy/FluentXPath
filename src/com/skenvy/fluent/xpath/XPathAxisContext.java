@@ -26,4 +26,16 @@ public class XPathAxisContext extends XPathBuilder implements NotBuildableContex
 		return swapToNodeContext();
 	}
 
+	@Override
+	public XPathNodeContext nodeLineage(String... nodeTypes) {
+		for(int k = 0; k < nodeTypes.length; k++) {
+			if(k == (nodeTypes.length - 1)) {
+				return this.nodeOfType(nodeTypes[k]);
+			} else {
+				this.nodeOfType(nodeTypes[k]).withChild();
+			}
+		}
+		return swapToNodeContext();
+	}
+
 }

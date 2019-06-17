@@ -1,5 +1,6 @@
 package com.skenvy.fluent.xpath;
 
+import com.skenvy.fluent.xpath.contextualisers.XPathAttributeContextualisers;
 import com.skenvy.fluent.xpath.contextualisers.XPathNodeContextualisers;
 
 /***
@@ -7,6 +8,18 @@ import com.skenvy.fluent.xpath.contextualisers.XPathNodeContextualisers;
  * a number of appropriate ways to start an XPath
  */
 public class XPathInitialiser extends XPathBuilder {
+	
+	/***
+	 * A path that can be used to initialise the XPath at a html head node,
+	 * when crafting an XPath to use in an html document
+	 */
+	private final static String htmlHeadPath = "html/head";
+
+	/***
+	 * A path that can be used to initialise the XPath at a html body node,
+	 * when crafting an XPath to use in an html document
+	 */
+	private final static String htmlBodyPath = "html/body";
 	
 	/***
 	 * Create a new XPathBuilder
@@ -157,9 +170,47 @@ public class XPathInitialiser extends XPathBuilder {
 		return fromTheCurrentContextOfNodeType(XPathNodeContextualisers.nodeWildcard);
 	}
 	
-	//TODO: Add for "html/body" and "html/head" ?
-	//What is the difference between "//*" every node of any type and "//." 
-	// every node's self reflection (has a lot more nodes than "every node")
-	//TODO: Add "attibute" start
+	/***
+	 * Returns an initialiaser that provides fluent access to all relative axis
+	 * beyond the "descendant, child, and current context"; such that relative
+	 * axis may be utilised in predicates that include references to other
+	 * nodes located relative to the node being predicated. Note that if you 
+	 * are using this to unwrap attribute elements relative to the current 
+	 * context node, if you wish to utilise them in a way not provided
+	 * for by the common functionality of the predicate contextualisers, that
+	 * the shorthand method "getPredicateAttribute" can be called statically
+	 * from this initialiser class.
+	 * @return XPathPredicatePathInitialiser
+	 */
+	public static XPathPredicatePathInitialiser startWithAnAxisRelativeToTheCurrentContext() {
+		return (new XPathPredicatePathInitialiser());
+	}
+	
+	/***
+	 * Shorthand for the construction of a buildable XPath that is solely an
+	 * attribute axis relative to the current context node ; yields an XPath
+	 * that is only "@{@code <attributeName>}".
+	 * @param attributeName
+	 * @return XPathAttributeContext
+	 */
+	public static XPathAttributeContext getPredicateAttribute(String attributeName) {
+		return initialiseBuilder(XPathAttributeContextualisers.currentContextAttribute+attributeName).swapToAttributeContext();
+	}
+	
+	/***
+	 * Starts the XPath as targeting the body node of an html document.
+	 * @return XPathNodeContext
+	 */
+	public static XPathNodeContext fromTheHtmlBodyNode() {
+		return initialiseBuilder(htmlBodyPath).swapToNodeContext();
+	}
+	
+	/***
+	 * Starts the XPath as targeting the head node of an html document.
+	 * @return XPathNodeContext
+	 */
+	public static XPathNodeContext fromTheHtmlHeadNode() {
+		return initialiseBuilder(htmlHeadPath).swapToNodeContext();
+	}
 
 }

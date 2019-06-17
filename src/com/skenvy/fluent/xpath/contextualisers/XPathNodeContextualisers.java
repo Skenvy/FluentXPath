@@ -9,10 +9,29 @@ import com.skenvy.fluent.xpath.XPathNodeContext;
  */
 public interface XPathNodeContextualisers {
 	
+	/***
+	 * The wildcard used to select "any" node.
+	 */
 	String nodeWildcard = "*";
 	
+	/***
+	 * Selects, within the current axis, any node that is within that axis
+	 * @return XPathNodeContext
+	 */
 	XPathNodeContext nodeOfAnyType();
 	
+	/***
+	 * Selects, within the current axis, any named node that is within the axis
+	 * @return XPathNodeContext
+	 */
 	XPathNodeContext nodeOfType(String nodeType);
+	
+	/***
+	 * Selects, within the current axis, a chain of named nodes as direct
+	 * children of the immediately preceding named node, and returns the
+	 * node context of the result of this.
+	 * @return XPathNodeContext
+	 */
+	XPathNodeContext nodeLineage(String... nodeTypes);
 
 }

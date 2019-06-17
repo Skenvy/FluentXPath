@@ -17,80 +17,82 @@ public class XPathPredicateContext extends XPathBuilder implements BuildableCont
 
 	@Override
 	public XPathAxisContext withAncestor() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.ancestor);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withAncestorOrSelf() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.ancestorOrSelf);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withChild() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.child);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withDescendant() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.descendant);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withDescendantOrSelf() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.descendantOrSelf);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withFollowing() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.following);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withFollowingSibling() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.followingSibling);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withNamespace() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.namespace);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withPreceding() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.preceding);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathAxisContext withPrecedingSibling() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.precedingSibling);
+		return swapToAxisContext();
 	}
 
 	@Override
 	public XPathNodeContext withParent() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.parent);
+		return swapToNodeContext();
 	}
 
 	@Override
 	public XPathNodeContext withSelf() {
-		// TODO Auto-generated method stub
-		return null;
+		appendTheStringBuilder(XPathAxisContextualisers.self);
+		return swapToNodeContext();
 	}
 
 	@Override
-	public XPathAxisContext withAttribute() {
-		// TODO Auto-generated method stub
-		return null;
+	public XPathAttributeContext withAttribute(String attributeName) {
+		appendTheStringBuilder(XPathAxisContextualisers.attribute);
+		appendTheStringBuilder(attributeName);
+		return swapToAttributeContext();
 	}
+
 
 }

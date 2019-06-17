@@ -88,9 +88,10 @@ public class XPathNodeContext extends XPathBuilder implements BuildableContext, 
 	}
 
 	@Override
-	public XPathAxisContext withAttribute() {
+	public XPathAttributeContext withAttribute(String attributeName) {
 		appendTheStringBuilder(XPathAxisContextualisers.attribute);
-		return swapToAxisContext();
+		appendTheStringBuilder(attributeName);
+		return swapToAttributeContext();
 	}
 
 }
