@@ -12,7 +12,7 @@ public class XPathPredicateContext extends XPathBuilder implements BuildableCont
 
 	@Override
 	public String buildToString() {
-		return this.buildTheStringBuilder();
+		return _buildToString();
 	}
 
 	@Override

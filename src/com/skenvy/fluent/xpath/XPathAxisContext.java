@@ -11,31 +11,22 @@ public class XPathAxisContext extends XPathBuilder implements NotBuildableContex
 
 	@Override
 	public void whyIsntThisABuildableContext() {
-		// TODO Auto-generated method stub
+		_whyIsntThisABuildableContext();
 	}
 
 	@Override
 	public XPathNodeContext nodeOfAnyType() {
-		appendStringBuilder(XPathNodeContextualisers.nodeWildcard);
-		return swapToNodeContext();
+		return _nodeOfAnyType();
 	}
 
 	@Override
 	public XPathNodeContext nodeOfType(String nodeType) {
-		appendStringBuilder(nodeType);
-		return swapToNodeContext();
+		return _nodeOfType(nodeType);
 	}
 
 	@Override
 	public XPathNodeContext nodeLineage(String... nodeTypes) {
-		for(int k = 0; k < nodeTypes.length; k++) {
-			if(k == (nodeTypes.length - 1)) {
-				return this.nodeOfType(nodeTypes[k]);
-			} else {
-				this.nodeOfType(nodeTypes[k]).withChild();
-			}
-		}
-		return swapToNodeContext();
+		return _nodeLineage(nodeTypes);
 	}
 
 }

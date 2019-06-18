@@ -12,7 +12,7 @@ public class XPathNodeContext extends XPathBuilder implements BuildableContext, 
 
 	@Override
 	public String buildToString() {
-		return this.buildTheStringBuilder();
+		return _buildToString();
 	}
 
 	@Override

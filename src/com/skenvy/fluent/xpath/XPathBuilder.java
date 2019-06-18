@@ -2,6 +2,7 @@ package com.skenvy.fluent.xpath;
 
 import com.skenvy.fluent.xpath.contextualisers.XPathAttributeContextualisers;
 import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
+import com.skenvy.fluent.xpath.contextualisers.XPathNodeContextualisers;
 
 /***
  * The contextless builder. Subclassed by the "context aware" builder facades.
@@ -560,7 +561,48 @@ public abstract class XPathBuilder {
 	/*    Subclass Contextualiser's function deduplication : Node Context    */
 	/*************************************************************************/
 	
-	
+	/***
+	 * Deduplication of the functionality of the interface method {@code 
+	 * (new <? implements XPathNodeContextualisers>).nodeOfAnyType();
+	 * }
+	 * @param attributeName
+	 * @return XPathAttributeContext
+	 */
+	/*Package Private*/ final XPathNodeContext _nodeOfAnyType() {
+		appendStringBuilder(XPathNodeContextualisers.nodeWildcard);
+		return swapToNodeContext();
+	}
+
+	/***
+	 * Deduplication of the functionality of the interface method {@code 
+	 * (new <? implements XPathNodeContextualisers>).nodeOfType(String 
+	 * nodeType);}
+	 * @param attributeName
+	 * @return XPathAttributeContext
+	 */
+	/*Package Private*/ final XPathNodeContext _nodeOfType(String nodeType) {
+		appendStringBuilder(nodeType);
+		return swapToNodeContext();
+	}
+
+	/***
+	 * Deduplication of the functionality of the interface method {@code 
+	 * (new <? implements XPathNodeContextualisers>).nodeLineage(String... 
+	 * nodeTypes);}
+	 * @param attributeName
+	 * @return XPathAttributeContext
+	 */
+	/*Package Private*/ final XPathNodeContext 
+	                                        _nodeLineage(String... nodeTypes) {
+		for(int k = 0; k < nodeTypes.length; k++) {
+			if(k == (nodeTypes.length - 1)) {
+				return this._nodeOfType(nodeTypes[k]);
+			} else {
+				this._nodeOfType(nodeTypes[k]).withChild();
+			}
+		}
+		return swapToNodeContext();
+	}
 	
 	/*************************************************************************/
 	/* Subclass Contextualiser's function deduplication : Predicate Context  */
