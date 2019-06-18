@@ -9,7 +9,8 @@ import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
  * initialise paths with axis' other than "descendant, child, or current
  * context" that are refined to being in the "current context"
  */
-public class XPathPredicatePathInitialiser extends XPathBuilder implements XPathAxisContextualisers {
+public class XPathPredicatePathInitialiser extends XPathBuilder 
+                                          implements XPathAxisContextualisers {
 
 	/***
 	 * Create a new XPathBuilder
@@ -17,97 +18,83 @@ public class XPathPredicatePathInitialiser extends XPathBuilder implements XPath
 	public XPathPredicatePathInitialiser() {
 		super();
 	}
-
+	
 	// Implicitly current context
 	@Override
 	public XPathAxisContext withAncestor() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextAncestor);
-		return swapToAxisContext();
+		return _withAncestor_CurrentContext() ;
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathAxisContext withAncestorOrSelf() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextAncestorOrSelf);
-		return swapToAxisContext();
+		return _withAncestorOrSelf_CurrentContext();
 	}
 
 	// NOT CURRENT CONTEXT: consider using @Deprecated
 	@Override
 	public XPathAxisContext withChild() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextChild);
-		return swapToAxisContext();
+		return _withChild_CurrentContext();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathAxisContext withDescendant() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextDescendant);
-		return swapToAxisContext();
+		return _withDescendant_CurrentContext();
 	}
 
 	// NOT CURRENT CONTEXT: consider using @Deprecated
 	@Override
 	public XPathAxisContext withDescendantOrSelf() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextDescendantOrSelf);
-		return swapToAxisContext();
+		return _withDescendantOrSelf();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathAxisContext withFollowing() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextFollowing);
-		return swapToAxisContext();
+		return _withFollowing_CurrentContext();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathAxisContext withFollowingSibling() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextFollowingSibling);
-		return swapToAxisContext();
+		return _withFollowingSibling_CurrentContext();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathAxisContext withNamespace() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextNamespace);
-		return swapToAxisContext();
+		return _withNamespace();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathAxisContext withPreceding() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextPreceding);
-		return swapToAxisContext();
+		return _withPreceding_CurrentContext();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathAxisContext withPrecedingSibling() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextPrecedingSibling);
-		return swapToAxisContext();
+		return _withPrecedingSibling_CurrentContext();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathNodeContext withParent() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextParent);
-		return swapToNodeContext();
+		return _withParent_CurrentContext();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathNodeContext withSelf() {
-		appendTheStringBuilder(XPathAxisContextualisers.currentContextSelf);
-		return swapToNodeContext();
+		return _withSelf_CurrentContext();
 	}
 
 	// Implicitly current context
 	@Override
 	public XPathAttributeContext withAttribute(String attributeName) {
-		appendTheStringBuilder(XPathAttributeContextualisers.currentContextAttribute);
-		appendTheStringBuilder(attributeName);
-		return swapToAttributeContext();
+		return _withAttribute_CurrentContext(attributeName);
 	}
 
 }

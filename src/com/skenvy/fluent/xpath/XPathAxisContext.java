@@ -16,13 +16,13 @@ public class XPathAxisContext extends XPathBuilder implements NotBuildableContex
 
 	@Override
 	public XPathNodeContext nodeOfAnyType() {
-		appendTheStringBuilder(XPathNodeContextualisers.nodeWildcard);
+		appendStringBuilder(XPathNodeContextualisers.nodeWildcard);
 		return swapToNodeContext();
 	}
 
 	@Override
 	public XPathNodeContext nodeOfType(String nodeType) {
-		appendTheStringBuilder(nodeType);
+		appendStringBuilder(nodeType);
 		return swapToNodeContext();
 	}
 

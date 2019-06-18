@@ -17,81 +17,67 @@ public class XPathNodeContext extends XPathBuilder implements BuildableContext, 
 
 	@Override
 	public XPathAxisContext withAncestor() {
-		appendTheStringBuilder(XPathAxisContextualisers.ancestor);
-		return swapToAxisContext();
+		return _withAncestor() ;
 	}
 
 	@Override
 	public XPathAxisContext withAncestorOrSelf() {
-		appendTheStringBuilder(XPathAxisContextualisers.ancestorOrSelf);
-		return swapToAxisContext();
+		return _withAncestorOrSelf();
 	}
 
 	@Override
 	public XPathAxisContext withChild() {
-		appendTheStringBuilder(XPathAxisContextualisers.child);
-		return swapToAxisContext();
+		return _withChild();
 	}
 
 	@Override
 	public XPathAxisContext withDescendant() {
-		appendTheStringBuilder(XPathAxisContextualisers.descendant);
-		return swapToAxisContext();
+		return _withDescendant();
 	}
 
 	@Override
 	public XPathAxisContext withDescendantOrSelf() {
-		appendTheStringBuilder(XPathAxisContextualisers.descendantOrSelf);
-		return swapToAxisContext();
+		return _withDescendantOrSelf();
 	}
 
 	@Override
 	public XPathAxisContext withFollowing() {
-		appendTheStringBuilder(XPathAxisContextualisers.following);
-		return swapToAxisContext();
+		return _withFollowing();
 	}
 
 	@Override
 	public XPathAxisContext withFollowingSibling() {
-		appendTheStringBuilder(XPathAxisContextualisers.followingSibling);
-		return swapToAxisContext();
+		return _withFollowingSibling();
 	}
 
 	@Override
 	public XPathAxisContext withNamespace() {
-		appendTheStringBuilder(XPathAxisContextualisers.namespace);
-		return swapToAxisContext();
+		return _withNamespace();
 	}
 
 	@Override
 	public XPathAxisContext withPreceding() {
-		appendTheStringBuilder(XPathAxisContextualisers.preceding);
-		return swapToAxisContext();
+		return _withPreceding();
 	}
 
 	@Override
 	public XPathAxisContext withPrecedingSibling() {
-		appendTheStringBuilder(XPathAxisContextualisers.precedingSibling);
-		return swapToAxisContext();
+		return _withPrecedingSibling();
 	}
 
 	@Override
 	public XPathNodeContext withParent() {
-		appendTheStringBuilder(XPathAxisContextualisers.parent);
-		return swapToNodeContext();
+		return _withParent();
 	}
 
 	@Override
 	public XPathNodeContext withSelf() {
-		appendTheStringBuilder(XPathAxisContextualisers.self);
-		return swapToNodeContext();
+		return _withSelf();
 	}
 
 	@Override
 	public XPathAttributeContext withAttribute(String attributeName) {
-		appendTheStringBuilder(XPathAxisContextualisers.attribute);
-		appendTheStringBuilder(attributeName);
-		return swapToAttributeContext();
+		return _withAttribute(attributeName);
 	}
 
 }
