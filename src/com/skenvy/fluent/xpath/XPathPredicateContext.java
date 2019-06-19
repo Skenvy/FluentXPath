@@ -4,8 +4,19 @@ import com.skenvy.fluent.BuildableContext;
 import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
 import com.skenvy.fluent.xpath.contextualisers.XPathPredicateContextualisers;
 
+
+/***
+ * A collection of interfaces that describe functions that can be applied to 
+ * the inner class, while in the context of having the last element of the 
+ * inner class' method chained construction be a predicate component.
+ */
 public class XPathPredicateContext extends XPathBuilder implements BuildableContext, XPathAxisContextualisers, XPathPredicateContextualisers {
 	
+	/***
+	 * Create a new XPathBuilder subclass that refers to an existing instance
+	 * of the XPathBuilder as the superclass to the context class that brought
+	 * us to this context.
+	 */
 	/*Package Private*/ XPathPredicateContext(XPathBuilder xPathBuilder) {
 		super(xPathBuilder);
 	}
