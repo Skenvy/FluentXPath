@@ -5,7 +5,9 @@ import com.skenvy.fluent.xpath.contextualisers.XPathNodeContextualisers;
 
 /***
  * The builder's "initialiser" used to initialise the XPath builder with any of
- * a number of appropriate ways to start an XPath
+ * a number of appropriate ways to start an XPath, used to start "predicate
+ * paths" inside of predicates, used to wrap sets of internal predicates in 
+ * boolean expression syntax, and generate predicates themselves.
  */
 public class XPathInitialiser extends XPathBuilder {
 	
