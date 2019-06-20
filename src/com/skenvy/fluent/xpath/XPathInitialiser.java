@@ -182,10 +182,10 @@ public class XPathInitialiser extends XPathBuilder {
 	 * for by the common functionality of the predicate contextualisers, that
 	 * the shorthand method "getPredicateAttribute" can be called statically
 	 * from this initialiser class.
-	 * @return XPathPredicatePathInitialiser
+	 * @return XPathPredicatedPathInitialiser
 	 */
-	public static XPathPredicatePathInitialiser startWithAnAxisRelativeToTheCurrentContext() {
-		return (new XPathPredicatePathInitialiser());
+	public static XPathPredicatedPathInitialiser startWithAnAxisRelativeToTheCurrentContext() {
+		return (new XPathPredicatedPathInitialiser());
 	}
 	
 	/***
