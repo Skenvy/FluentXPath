@@ -1,6 +1,13 @@
 package com.skenvy.fluent.xpath.predicates;
 
-public class PredicateStringContext  extends PredicateBuilder {
+import com.skenvy.fluent.BuildableContext;
+
+/***
+ * A collection of interfaces that describe functions that can be applied to 
+ * the inner class, while in the context of having the last element of the 
+ * inner class' method chained construction be a string component.
+ */
+public class PredicateStringContext  extends PredicateBuilder implements BuildableContext {
 	
 	/***
 	 * Create a new PredicateBuilder subclass that refers to an existing instance
@@ -9,6 +16,11 @@ public class PredicateStringContext  extends PredicateBuilder {
 	 */
 	/*Package Private*/ PredicateStringContext(PredicateBuilder predicateBuilder) {
 		super(predicateBuilder);
+	}
+	
+	@Override
+	public String buildToString() {
+		return this.buildTheStringBuilder();
 	}
 
 }
