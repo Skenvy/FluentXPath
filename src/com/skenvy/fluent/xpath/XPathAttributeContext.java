@@ -16,7 +16,6 @@ public class XPathAttributeContext extends XPathBuilder implements BuildableCont
 	 */
 	/*Package Private*/ XPathAttributeContext(XPathBuilder xPathBuilder) {
 		super(xPathBuilder);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
