@@ -280,6 +280,20 @@ public abstract class XPathBuilder {
 	}
 	
 	/*************************************************************************/
+	/*    Buildability Contextualiser's function deduplication : Node Set    */
+	/*************************************************************************/
+	
+	/***
+	 * Deduplication of the functionality of the interface method {@code 
+	 * (new <? implements BuildableContext>).buildToString();
+	 * }
+	 * @return String
+	 */
+	/*Package Private*/ final String _buildTheNodeSetToString() {
+		return this._buildToString();
+	}
+	
+	/*************************************************************************/
 	/*    Subclass Contextualiser's function deduplication : Axis Context    */
 	/*************************************************************************/
 	

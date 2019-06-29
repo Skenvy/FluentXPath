@@ -7,15 +7,28 @@ import com.skenvy.fluent.BuildableContext;
  * the inner class, while in the context of having the last element of the 
  * inner class' method chained construction be a boolean component.
  */
-public class PredicateBooleanContext extends PredicateBuilder implements BuildableContext {
+public final class PredicateBooleanContext extends PredicateBuilder implements BuildableContext {
 
 	/***
 	 * Create a new PredicateBuilder subclass that refers to an existing instance
 	 * of the PredicateBuilder as the superclass to the context class that brought
 	 * us to this context.
 	 */
+	
+	private PredicateBooleanContext(CharSequence chars) {
+		super(chars);
+	}
+	
 	/*Package Private*/ PredicateBooleanContext(PredicateBuilder predicateBuilder) {
-		super(predicateBuilder);
+		super("(boolean("+predicateBuilder._buildToString()+"))");
+	}
+	
+	public static PredicateBooleanContext TRUE() {
+		return new PredicateBooleanContext("(true)");
+	}
+	
+	public static PredicateBooleanContext FALSE() {
+		return new PredicateBooleanContext("(false)");
 	}
 	
 	@Override

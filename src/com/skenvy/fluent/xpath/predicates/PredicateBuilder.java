@@ -151,15 +151,9 @@ public abstract class PredicateBuilder {
 	}
 	
 	/***
-	 * Context class getters:  The "node set" context class
-	 * @return PredicateNodeSetContext
+	 * Context class getters:  The "node set" context class is an initial
+	 * context only and cannot be swapped to!
 	 */
-	private final PredicateNodeSetContext getNodeSetContext() {
-		if(this.nodeSetContext == null) {
-			this.nodeSetContext = new PredicateNodeSetContext(this);
-		}
-		return this.nodeSetContext;
-	}
 
 	/*************************************************************************/
 	/*                            Context Swappers                           */
@@ -190,12 +184,9 @@ public abstract class PredicateBuilder {
 	}
 	
 	/***
-	 * Context class swappers:  The "node set" context class
-	 * @return PredicateNodeSetContext
+	 * Context class swappers:  The "node set" context class is an initial
+	 * context only and cannot be swapped to!
 	 */
-	/*Package Private*/ final PredicateNodeSetContext swapToNodeSetContext() {
-		return this.predicateBuilder.getNodeSetContext();
-	}
 	
 	/*************************************************************************/
 	/*   Outer class wrapper functionality to interact with the inner class  */
@@ -275,28 +266,70 @@ public abstract class PredicateBuilder {
 		return this;
 	}
 	
-	/*Package Private*/ final PredicateBooleanContext _OR(PredicateBuilder... builders) {
+	private final PredicateBuilder _iterateWrapComparator(String comparator, PredicateBuilder... builders) {
+		appendStringBuilder("(");
+		for(int k = 0; k < builders.length-1; k++) {
+			appendStringBuilder("(("+builders[k]._buildToString()+")"+comparator+"("+builders[k+1]._buildToString()+"))");
+		}
+		appendStringBuilder(")");
+		return this;
+	}
+	
+	protected final PredicateBooleanContext _NOT(PredicateBuilder builder) {
+		appendStringBuilder("(not("+builder._buildToString()+"))");
+		return swapToBooleanContext();
+	}
+	
+	protected final PredicateBooleanContext _OR(PredicateBuilder... builders) {
 		return _iterateWrapSeparator(" or ",builders).swapToBooleanContext();
 	}
 	
-	/*Package Private*/ final PredicateBooleanContext _AND(PredicateBuilder... builders) {
+	protected final PredicateBooleanContext _AND(PredicateBuilder... builders) {
 		return _iterateWrapSeparator(" and ",builders).swapToBooleanContext();
 	}
 	
-	/*Package Private*/ final PredicateNumberContext _PLUS(PredicateNumberContext... numbers) {
+	protected final PredicateBooleanContext _EQUALS(PredicateBuilder... builders) {
+		return _iterateWrapComparator("=",builders).swapToBooleanContext();
+	}
+	
+	protected final PredicateBooleanContext _NOTEQUALS(PredicateBuilder... builders) {
+		return _iterateWrapComparator("!=",builders).swapToBooleanContext();
+	}
+	
+	protected final PredicateBooleanContext _GREATERTHAN(PredicateBuilder... builders) {
+		return _iterateWrapComparator(">",builders).swapToBooleanContext();
+	}
+	
+	protected final PredicateBooleanContext _GREATERTHANOREQUALTO(PredicateBuilder... builders) {
+		return _iterateWrapComparator(">=",builders).swapToBooleanContext();
+	}
+	
+	protected final PredicateBooleanContext _LESSTHAN(PredicateBuilder... builders) {
+		return _iterateWrapComparator("<",builders).swapToBooleanContext();
+	}
+	
+	protected final PredicateBooleanContext _LESSTHANOREQUALTO(PredicateBuilder... builders) {
+		return _iterateWrapComparator("<=",builders).swapToBooleanContext();
+	}
+	
+	protected final PredicateNumberContext _PLUS(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator("+",numbers).swapToNumberContext();
 	}
 	
-	/*Package Private*/ final PredicateNumberContext _MINUS(PredicateNumberContext... numbers) {
+	protected final PredicateNumberContext _MINUS(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator("-",numbers).swapToNumberContext();
 	}
 	
-	/*Package Private*/ final PredicateNumberContext _MULTIPLY(PredicateNumberContext... numbers) {
+	protected final PredicateNumberContext _MULTIPLY(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator("*",numbers).swapToNumberContext();
 	}
 	
-	/*Package Private*/ final PredicateNumberContext _DIVIDE(PredicateNumberContext... numbers) {
+	protected final PredicateNumberContext _DIVIDE(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator(" div ",numbers).swapToNumberContext();
+	}
+	
+	protected final PredicateNumberContext _MODULO(PredicateNumberContext... numbers) {
+		return _iterateWrapSeparator(" mod ",numbers).swapToNumberContext();
 	}
 
 }

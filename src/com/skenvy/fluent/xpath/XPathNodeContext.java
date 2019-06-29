@@ -9,7 +9,7 @@ import com.skenvy.fluent.xpath.contextualisers.XPathPredicateContextualisers;
  * the inner class, while in the context of having the last element of the 
  * inner class' method chained construction be a node component.
  */
-public class XPathNodeContext extends XPathBuilder implements BuildableContext, XPathAxisContextualisers, XPathPredicateContextualisers {
+public class XPathNodeContext extends XPathBuilder implements BuildableContext, XPathAxisContextualisers, XPathPredicateContextualisers, NodeSetContext {
 
 	/***
 	 * Create a new XPathBuilder subclass that refers to an existing instance
@@ -88,6 +88,11 @@ public class XPathNodeContext extends XPathBuilder implements BuildableContext, 
 	@Override
 	public XPathAttributeContext withAttribute(String attributeName) {
 		return _withAttribute(attributeName);
+	}
+
+	@Override
+	public String buildTheNodeSetToString() {
+		return _buildTheNodeSetToString();
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.skenvy.fluent.xpath.predicates;
 
 import com.skenvy.fluent.BuildableContext;
+import com.skenvy.fluent.xpath.XPathAttributeContext;
 
 /***
  * A collection of interfaces that describe functions that can be applied to 
@@ -15,7 +16,11 @@ public class PredicateNumberContext extends PredicateBuilder implements Buildabl
 	 * us to this context.
 	 */
 	/*Package Private*/ PredicateNumberContext(PredicateBuilder predicateBuilder) {
-		super(predicateBuilder);
+		super("(number("+predicateBuilder._buildToString()+"))");
+	}
+	
+	/*Package Private*/ PredicateNumberContext(XPathAttributeContext xPathAttributeContext) {
+		super("(number("+xPathAttributeContext.buildToString()+"))");
 	}
 	
 	@Override

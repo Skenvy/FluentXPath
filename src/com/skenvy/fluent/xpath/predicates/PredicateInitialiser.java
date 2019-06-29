@@ -71,12 +71,40 @@ public class PredicateInitialiser extends PredicateBuilder {
 	/*The following is the simple implementation for a variety of predicates.*/
 	/*************************************************************************/
 	
+	final PredicateBooleanContext NOT(PredicateBuilder builder) {
+		return initialiseBuilder()._NOT(builder);
+	}
+	
 	public static final PredicateBooleanContext OR(PredicateBuilder... builders) {
 		return initialiseBuilder()._OR(builders);
 	}
 	
 	public static final PredicateBooleanContext AND(PredicateBuilder... builders) {
 		return initialiseBuilder()._AND(builders);
+	}
+	
+	public static final PredicateBooleanContext EQUALS(PredicateBuilder... builders) {
+		return initialiseBuilder()._EQUALS(builders);
+	}
+	
+	public static final PredicateBooleanContext NOTEQUALS(PredicateBuilder... builders) {
+		return initialiseBuilder()._NOTEQUALS(builders);
+	}
+	
+	public static final PredicateBooleanContext GREATERTHAN(PredicateBuilder... builders) {
+		return initialiseBuilder()._GREATERTHAN(builders);
+	}
+	
+	public static final PredicateBooleanContext GREATERTHANOREQUALTO(PredicateBuilder... builders) {
+		return initialiseBuilder()._GREATERTHANOREQUALTO(builders);
+	}
+	
+	public static final PredicateBooleanContext LESSTHAN(PredicateBuilder... builders) {
+		return initialiseBuilder()._LESSTHAN(builders);
+	}
+	
+	public static final PredicateBooleanContext LESSTHANOREQUALTO(PredicateBuilder... builders) {
+		return initialiseBuilder()._LESSTHANOREQUALTO(builders);
 	}
 	
 	public static final PredicateNumberContext PLUS(PredicateNumberContext... numbers) {
@@ -93,6 +121,10 @@ public class PredicateInitialiser extends PredicateBuilder {
 	
 	public static final PredicateNumberContext DIVIDE(PredicateNumberContext... numbers) {
 		return initialiseBuilder()._DIVIDE(numbers);
+	}
+	
+	public static final PredicateNumberContext MODULO(PredicateNumberContext... numbers) {
+		return initialiseBuilder()._MODULO(numbers);
 	}
 	
 //	/***
