@@ -9,8 +9,7 @@ import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
  * initialise paths with axis' other than "descendant, child, or current
  * context" that are refined to being in the "current context"
  */
-public class XPathPredicatedPathInitialiser extends XPathBuilder 
-                                          implements XPathAxisContextualisers {
+public class XPathPredicatedPathInitialiser extends XPathBuilder implements XPathAxisContextualisers {
 
 	/***
 	 * Create a new XPathBuilder

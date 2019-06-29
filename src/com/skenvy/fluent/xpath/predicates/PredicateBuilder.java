@@ -1,9 +1,5 @@
 package com.skenvy.fluent.xpath.predicates;
 
-import com.skenvy.fluent.xpath.contextualisers.XPathAttributeContextualisers;
-import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
-import com.skenvy.fluent.xpath.contextualisers.XPathNodeContextualisers;
-
 /***
  * The contextless builder. Subclassed by the "context aware" builder facades.
  * There is not any public way to initialise the builder's context classes
@@ -235,19 +231,6 @@ public abstract class PredicateBuilder {
 		prependStringBuilder(prepend);
 		appendStringBuilder(append);
 	}
-	
-	/*
-	 * Following is the deduplication of function implementations for functions
-	 * defined in the "buildable/not-buildable" and subclass contexts. So that
-	 * there can be a 1-1 correspondence between these superclass, "package
-	 * private", finalised methods, and the requirement to override functions
-	 * of the same function signature, we will bastardise the java naming
-	 * conventions, by simply prefacing these superclass defined functions'
-	 * names with underscores. Thus we have deduplicated the function
-	 * signatures of method bodies defined for the purpose of deduplication!
-	 * 
-	 * Deduplinception!
-	 */
 	
 	/*************************************************************************/
 	/*   Buildability Contextualiser's function deduplication : Buildable    */
