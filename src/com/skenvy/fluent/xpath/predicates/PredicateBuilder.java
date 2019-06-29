@@ -275,12 +275,28 @@ public abstract class PredicateBuilder {
 		return this;
 	}
 	
-	public final PredicateBooleanContext _OR(PredicateBuilder... builders) {
+	/*Package Private*/ final PredicateBooleanContext _OR(PredicateBuilder... builders) {
 		return _iterateWrapSeparator(" or ",builders).swapToBooleanContext();
 	}
 	
-	public final PredicateBooleanContext _AND(PredicateBuilder... builders) {
+	/*Package Private*/ final PredicateBooleanContext _AND(PredicateBuilder... builders) {
 		return _iterateWrapSeparator(" and ",builders).swapToBooleanContext();
+	}
+	
+	/*Package Private*/ final PredicateNumberContext _PLUS(PredicateNumberContext... numbers) {
+		return _iterateWrapSeparator("+",numbers).swapToNumberContext();
+	}
+	
+	/*Package Private*/ final PredicateNumberContext _MINUS(PredicateNumberContext... numbers) {
+		return _iterateWrapSeparator("-",numbers).swapToNumberContext();
+	}
+	
+	/*Package Private*/ final PredicateNumberContext _MULTIPLY(PredicateNumberContext... numbers) {
+		return _iterateWrapSeparator("*",numbers).swapToNumberContext();
+	}
+	
+	/*Package Private*/ final PredicateNumberContext _DIVIDE(PredicateNumberContext... numbers) {
+		return _iterateWrapSeparator(" div ",numbers).swapToNumberContext();
 	}
 
 }

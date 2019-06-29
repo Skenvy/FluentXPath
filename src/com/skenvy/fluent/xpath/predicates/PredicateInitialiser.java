@@ -79,7 +79,21 @@ public class PredicateInitialiser extends PredicateBuilder {
 		return initialiseBuilder()._AND(builders);
 	}
 	
+	public static final PredicateNumberContext PLUS(PredicateNumberContext... numbers) {
+		return initialiseBuilder()._PLUS(numbers);
+	}
 	
+	public static final PredicateNumberContext MINUS(PredicateNumberContext... numbers) {
+		return initialiseBuilder()._MINUS(numbers);
+	}
+	
+	public static final PredicateNumberContext MULTIPLY(PredicateNumberContext... numbers) {
+		return initialiseBuilder()._MULTIPLY(numbers);
+	}
+	
+	public static final PredicateNumberContext DIVIDE(PredicateNumberContext... numbers) {
+		return initialiseBuilder()._DIVIDE(numbers);
+	}
 	
 //	/***
 //	 * 
