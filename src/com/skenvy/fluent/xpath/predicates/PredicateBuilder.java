@@ -261,5 +261,26 @@ public abstract class PredicateBuilder {
 		                   " are buildable contexts. Can't build a" +
 		                   " terminal axis");
 	}
+	
+	/*************************************************************************/
+	/*The following is the simple implementation for a variety of predicates.*/
+	/*************************************************************************/
+	
+	private final PredicateBuilder _iterateWrapSeparator(String seperator, PredicateBuilder... builders) {
+		appendStringBuilder("(");
+		for(int k = 0; k < builders.length-1; k++) {
+			appendStringBuilder("("+builders[k]._buildToString()+")"+seperator);
+		}
+		appendStringBuilder("("+builders[builders.length-1]._buildToString()+"))");
+		return this;
+	}
+	
+	public final PredicateBooleanContext _OR(PredicateBuilder... builders) {
+		return _iterateWrapSeparator(" or ",builders).swapToBooleanContext();
+	}
+	
+	public final PredicateBooleanContext _AND(PredicateBuilder... builders) {
+		return _iterateWrapSeparator(" and ",builders).swapToBooleanContext();
+	}
 
 }

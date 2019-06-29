@@ -18,6 +18,16 @@ public class PredicateNodeSetContext extends PredicateBuilder implements Buildab
 		super(predicateBuilder);
 	}
 	
+	/***
+	 * The Node Set Context is a collection of nodes returned either by the
+	 * node context, or the predicate context of the XPath. However as the
+	 * attribute context is also buildable but not a node set, we will have
+	 * here constructors to produce node set context from both node and
+	 * predicate contexts.
+	 */
+	
+	
+	
 	@Override
 	public String buildToString() {
 		return this.buildTheStringBuilder();

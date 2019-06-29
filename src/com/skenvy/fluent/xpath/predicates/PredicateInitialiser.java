@@ -67,6 +67,20 @@ public class PredicateInitialiser extends PredicateBuilder {
 	 * invoking this class to initialise more complicated predicate expressions
 	 */
 	
+	/*************************************************************************/
+	/*The following is the simple implementation for a variety of predicates.*/
+	/*************************************************************************/
+	
+	public static final PredicateBooleanContext OR(PredicateBuilder... builders) {
+		return initialiseBuilder()._OR(builders);
+	}
+	
+	public static final PredicateBooleanContext AND(PredicateBuilder... builders) {
+		return initialiseBuilder()._AND(builders);
+	}
+	
+	
+	
 //	/***
 //	 * 
 //	 * @return <*>
