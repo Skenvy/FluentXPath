@@ -23,6 +23,22 @@ public class PredicateNumberContext extends PredicateBuilder implements Buildabl
 		super("(number("+xPathAttributeContext.buildToString()+"))");
 	}
 	
+	/*Package Private*/ PredicateNumberContext(int number) {
+		super("("+number+")");
+	}
+	
+	/*Package Private*/ PredicateNumberContext(long number) {
+		super("("+number+")");
+	}
+	
+	/*Package Private*/ PredicateNumberContext(float number) {
+		super("("+number+")");
+	}
+	
+	/*Package Private*/ PredicateNumberContext(double number) {
+		super("("+number+")");
+	}
+	
 	@Override
 	public String buildToString() {
 		return this.buildTheStringBuilder();

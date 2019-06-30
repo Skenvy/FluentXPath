@@ -23,11 +23,11 @@ public final class PredicateBooleanContext extends PredicateBuilder implements B
 		super("(boolean("+predicateBuilder._buildToString()+"))");
 	}
 	
-	public static PredicateBooleanContext TRUE() {
+	/*Package Private*/ static PredicateBooleanContext TRUE() {
 		return new PredicateBooleanContext("(true)");
 	}
 	
-	public static PredicateBooleanContext FALSE() {
+	/*Package Private*/ static PredicateBooleanContext FALSE() {
 		return new PredicateBooleanContext("(false)");
 	}
 	

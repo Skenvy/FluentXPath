@@ -1,5 +1,6 @@
 package com.skenvy.fluent.xpath.predicates;
 
+import com.skenvy.fluent.xpath.XPathAttributeContext;
 
 /***
  * The builder's "initialiser" used to initialise the XPath builder with any of
@@ -65,13 +66,85 @@ public class PredicateInitialiser extends PredicateBuilder {
 	 * specific set of functions that can be incorporated into the "predicate
 	 * context", while also giving the option to expand that arbitrarily by 
 	 * invoking this class to initialise more complicated predicate expressions
+	 * 
+	 * These are to be used exclusively by or internal to the 
+	 * XPathPredicateContextualiser interface, which should wrap the preceding
+	 * expression in "(" ~ ")" and follow with the predicate builder wrapped in
+	 * "[" ~ "]".
+	 */
+	
+	/*************************************************************************/
+	/* The following are the specific initialisations of Predicate contexts. */
+	/*************************************************************************/
+	
+	//Boolean Constants
+	
+	public static final PredicateBooleanContext getTrueConstant() {
+		return PredicateBooleanContext.TRUE();
+	}
+	
+	public static final PredicateBooleanContext getFalseConstant() {
+		return PredicateBooleanContext.FALSE();
+	}
+	
+	//Get attribute wrapped to predicate
+	
+	public static final PredicateStringContext getAttributeAsString(XPathAttributeContext xPathAttributeContext) {
+		return new PredicateStringContext(xPathAttributeContext);
+	}
+	
+	public static final PredicateNumberContext getAttributeAsNumber(XPathAttributeContext xPathAttributeContext) {
+		return new PredicateNumberContext(xPathAttributeContext);
+	}
+	
+	//Get primitive types wrapped to predicate
+	
+	public static final PredicateStringContext getStringLiteralAsPredicate(String words) {
+		return new PredicateStringContext(words);
+	}
+	
+	public static final PredicateNumberContext getIntegerLiteralAsPredicate(int number) {
+		return new PredicateNumberContext(number);
+	}
+	
+	public static final PredicateNumberContext getLongLiteralAsPredicate(int number) {
+		return new PredicateNumberContext(number);
+	}
+	
+	public static final PredicateNumberContext getFloatLiteralAsPredicate(int number) {
+		return new PredicateNumberContext(number);
+	}
+	
+	public static final PredicateNumberContext getDoubleLiteralAsPredicate(int number) {
+		return new PredicateNumberContext(number);
+	}
+	
+	/*************************************************************************/
+	/* The following are the wrappers from any predicate builder to a type.  */
+	/*************************************************************************/
+	
+	public static final PredicateStringContext wrapAPredicateToStringType(PredicateBuilder predicateBuilder) {
+		return new PredicateStringContext(predicateBuilder);
+	}
+	
+	public static final PredicateNumberContext wrapAPredicateToNumberType(PredicateBuilder predicateBuilder) {
+		return new PredicateNumberContext(predicateBuilder);
+	}
+	
+	public static final PredicateBooleanContext wrapAPredicateToBooleanType(PredicateBuilder predicateBuilder) {
+		return new PredicateBooleanContext(predicateBuilder);
+	}
+	
+	/* Node set, although having a "wrap to" in xpath functions has no 
+	 * meaningful actualisation that cannot be produced simply through the
+	 * builder. Would be ill-advised to return it from here as a public static
 	 */
 	
 	/*************************************************************************/
 	/*The following is the simple implementation for a variety of predicates.*/
 	/*************************************************************************/
 	
-	final PredicateBooleanContext NOT(PredicateBuilder builder) {
+	public static final PredicateBooleanContext NOT(PredicateBuilder builder) {
 		return initialiseBuilder()._NOT(builder);
 	}
 	
@@ -91,19 +164,19 @@ public class PredicateInitialiser extends PredicateBuilder {
 		return initialiseBuilder()._NOTEQUALS(builders);
 	}
 	
-	public static final PredicateBooleanContext GREATERTHAN(PredicateBuilder... builders) {
+	public static final PredicateBooleanContext GREATERTHAN(PredicateNumberContext... builders) {
 		return initialiseBuilder()._GREATERTHAN(builders);
 	}
 	
-	public static final PredicateBooleanContext GREATERTHANOREQUALTO(PredicateBuilder... builders) {
+	public static final PredicateBooleanContext GREATERTHANOREQUALTO(PredicateNumberContext... builders) {
 		return initialiseBuilder()._GREATERTHANOREQUALTO(builders);
 	}
 	
-	public static final PredicateBooleanContext LESSTHAN(PredicateBuilder... builders) {
+	public static final PredicateBooleanContext LESSTHAN(PredicateNumberContext... builders) {
 		return initialiseBuilder()._LESSTHAN(builders);
 	}
 	
-	public static final PredicateBooleanContext LESSTHANOREQUALTO(PredicateBuilder... builders) {
+	public static final PredicateBooleanContext LESSTHANOREQUALTO(PredicateNumberContext... builders) {
 		return initialiseBuilder()._LESSTHANOREQUALTO(builders);
 	}
 	

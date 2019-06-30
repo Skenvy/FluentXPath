@@ -23,6 +23,10 @@ public class PredicateStringContext  extends PredicateBuilder implements Buildab
 		super("(string("+xPathAttributeContext.buildToString()+"))");
 	}
 	
+	/*Package Private*/ PredicateStringContext(String words) {
+		super("(\""+words+"\")");
+	}
+	
 	@Override
 	public String buildToString() {
 		return this.buildTheStringBuilder();

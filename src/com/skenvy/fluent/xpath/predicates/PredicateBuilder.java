@@ -151,9 +151,15 @@ public abstract class PredicateBuilder {
 	}
 	
 	/***
-	 * Context class getters:  The "node set" context class is an initial
-	 * context only and cannot be swapped to!
+	 * Context class getters:  The "node set" context class
+	 * @return PredicateNodeSetContext
 	 */
+	private final PredicateNodeSetContext getNodeSetContext() {
+		if(this.nodeSetContext == null) {
+			this.nodeSetContext = new PredicateNodeSetContext(this);
+		}
+		return this.nodeSetContext;
+	}
 
 	/*************************************************************************/
 	/*                            Context Swappers                           */
@@ -184,9 +190,11 @@ public abstract class PredicateBuilder {
 	}
 	
 	/***
-	 * Context class swappers:  The "node set" context class is an initial
-	 * context only and cannot be swapped to!
+	 * Context class swappers:  The "node set" context class
 	 */
+	/*Package Private*/ final PredicateNodeSetContext swapToNodeSetContext() {
+		return this.predicateBuilder.getNodeSetContext();
+	}
 	
 	/*************************************************************************/
 	/*   Outer class wrapper functionality to interact with the inner class  */
