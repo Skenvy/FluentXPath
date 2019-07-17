@@ -43,5 +43,13 @@ public class PredicateNumberContext extends PredicateBuilder implements Buildabl
 	public String buildToString() {
 		return this.buildTheStringBuilder();
 	}
+	
+	//PredicateNumberContext ceiling(PredicateNumberContext predicateNumberContext)
+	
+	//PredicateNumberContext floor(PredicateNumberContext predicateNumberContext)
+	
+	//PredicateNumberContext round(PredicateNumberContext predicateNumberContext)
 
+	//string-length(string)
+	
 }

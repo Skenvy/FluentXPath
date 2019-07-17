@@ -36,4 +36,8 @@ public final class PredicateBooleanContext extends PredicateBuilder implements B
 		return this.buildTheStringBuilder();
 	}
 	
+	//starts-with(string1, string2)
+	
+	//contains(string1, string2)
+	
 }

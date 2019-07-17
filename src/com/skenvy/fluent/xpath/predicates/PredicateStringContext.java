@@ -27,9 +27,31 @@ public class PredicateStringContext  extends PredicateBuilder implements Buildab
 		super("(\""+words+"\")");
 	}
 	
+	/*Package Private*/ static PredicateStringContext TEXT() {
+		return new PredicateStringContext("text()");
+	}
+	
+	/*Package Private*/ static PredicateStringContext DOT() {
+		return new PredicateStringContext(".");
+	}
+	
 	@Override
 	public String buildToString() {
 		return this.buildTheStringBuilder();
 	}
+	
+	//substring(string, offset, length?)
+	
+	//substring-before(string1, string2)
+	
+	//substring-after(string1, string2)
+	
+	//normalize-space(string)
+	
+	//translate(string1, string2, string3)
+	
+	//concat(string1, string2, ...)
+	
+	//format-number(number1, string1, string2)
 
 }

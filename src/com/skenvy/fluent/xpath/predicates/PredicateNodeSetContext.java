@@ -23,5 +23,19 @@ public class PredicateNodeSetContext extends PredicateBuilder implements Buildab
 	public String buildToString() {
 		return this.buildTheStringBuilder();
 	}
+	
+	//?:comment()
+	
+	//?:node()
+	
+	//?:processing-instruction()
+	
+	//?:text()
+	
+	//?:name()
+	
+	//?:position()
+	
+	//?:last()
 
 }
