@@ -223,6 +223,20 @@ public abstract class PredicateBuilder {
 	}
 	
 	/***
+	 * Interactions with the shared inner class: Append to the StringBuilder
+	 */
+	/*Package Private*/ final void appendStringBuilder(PredicateBuilder pb) {
+		this.predicateBuilderInner.stringBuilder.append(pb.predicateBuilderInner.stringBuilder);
+	}
+	
+	/***
+	 * Interactions with the shared inner class: Prepend to the StringBuilder
+	 */
+	/*Package Private*/ final void prependStringBuilder(PredicateBuilder pb){
+		this.predicateBuilderInner.stringBuilder.insert(0, pb.predicateBuilderInner.stringBuilder);
+	}
+	
+	/***
 	 * Interactions with the shared inner class: Wrap to the StringBuilder
 	 */
 	/*Package Private*/ final void wrapTheStringBuilder(CharSequence append,

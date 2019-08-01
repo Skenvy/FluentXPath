@@ -4,7 +4,6 @@ import com.skenvy.fluent.BuildableContext;
 import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
 import com.skenvy.fluent.xpath.contextualisers.XPathPredicateContextualisers;
 
-
 /***
  * A collection of interfaces that describe functions that can be applied to 
  * the inner class, while in the context of having the last element of the 

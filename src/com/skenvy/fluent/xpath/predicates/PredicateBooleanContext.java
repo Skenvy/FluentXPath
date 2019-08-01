@@ -24,11 +24,11 @@ public final class PredicateBooleanContext extends PredicateBuilder implements B
 	}
 	
 	/*Package Private*/ static PredicateBooleanContext TRUE() {
-		return new PredicateBooleanContext("(true)");
+		return new PredicateBooleanContext("(true())");
 	}
 	
 	/*Package Private*/ static PredicateBooleanContext FALSE() {
-		return new PredicateBooleanContext("(false)");
+		return new PredicateBooleanContext("(false())");
 	}
 	
 	@Override
@@ -37,7 +37,23 @@ public final class PredicateBooleanContext extends PredicateBuilder implements B
 	}
 	
 	//starts-with(string1, string2)
+	/*Package Private*/ static PredicateBooleanContext startsWith(PredicateStringContext stringToSearchIn, PredicateStringContext stringToSearchFor) {
+		PredicateBooleanContext pbc = new PredicateBooleanContext("starts-with(");
+		pbc.appendStringBuilder(stringToSearchIn);
+		pbc.appendStringBuilder(",");
+		pbc.appendStringBuilder(stringToSearchFor);
+		pbc.appendStringBuilder(")");
+		return pbc;
+	}
 	
 	//contains(string1, string2)
+	/*Package Private*/ static PredicateBooleanContext contains(PredicateStringContext stringToSearchIn, PredicateStringContext stringToSearchFor) {
+		PredicateBooleanContext pbc = new PredicateBooleanContext("contains(");
+		pbc.appendStringBuilder(stringToSearchIn);
+		pbc.appendStringBuilder(",");
+		pbc.appendStringBuilder(stringToSearchFor);
+		pbc.appendStringBuilder(")");
+		return pbc;
+	}
 	
 }

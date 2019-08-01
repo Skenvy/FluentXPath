@@ -15,6 +15,11 @@ public class PredicateNumberContext extends PredicateBuilder implements Buildabl
 	 * of the PredicateBuilder as the superclass to the context class that brought
 	 * us to this context.
 	 */
+	
+	private PredicateNumberContext(CharSequence chars) {
+		super(chars);
+	}
+	
 	/*Package Private*/ PredicateNumberContext(PredicateBuilder predicateBuilder) {
 		super("(number("+predicateBuilder._buildToString()+"))");
 	}
@@ -44,12 +49,33 @@ public class PredicateNumberContext extends PredicateBuilder implements Buildabl
 		return this.buildTheStringBuilder();
 	}
 	
-	//PredicateNumberContext ceiling(PredicateNumberContext predicateNumberContext)
+	/*Package Private*/ PredicateNumberContext ceiling(PredicateNumberContext predicateNumberContext) {
+		PredicateNumberContext pnc = new PredicateNumberContext("ceiling(");
+		pnc.appendStringBuilder(predicateNumberContext);
+		pnc.appendStringBuilder(")");
+		return pnc;
+	}
 	
-	//PredicateNumberContext floor(PredicateNumberContext predicateNumberContext)
+	/*Package Private*/ PredicateNumberContext floor(PredicateNumberContext predicateNumberContext) {
+		PredicateNumberContext pnc = new PredicateNumberContext("floor(");
+		pnc.appendStringBuilder(predicateNumberContext);
+		pnc.appendStringBuilder(")");
+		return pnc;
+	}
 	
-	//PredicateNumberContext round(PredicateNumberContext predicateNumberContext)
+	/*Package Private*/ PredicateNumberContext round(PredicateNumberContext predicateNumberContext) {
+		PredicateNumberContext pnc = new PredicateNumberContext("round(");
+		pnc.appendStringBuilder(predicateNumberContext);
+		pnc.appendStringBuilder(")");
+		return pnc;
+	}
 
 	//string-length(string)
+	/*Package Private*/ PredicateNumberContext stringLength(PredicateStringContext predicateStringContext) {
+		PredicateNumberContext pnc = new PredicateNumberContext("string-length(");
+		pnc.appendStringBuilder(predicateStringContext);
+		pnc.appendStringBuilder(")");
+		return pnc;
+	}
 	
 }
