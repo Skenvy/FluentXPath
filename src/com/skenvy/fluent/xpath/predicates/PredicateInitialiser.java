@@ -38,6 +38,7 @@ public class PredicateInitialiser extends PredicateBuilder {
 	 * CharSequence constructor
 	 * @return PredicateInitialiser
 	 */
+	@SuppressWarnings("unused") //TODO: Legacy from the XPathInitialiser. Remove?
 	private static PredicateInitialiser initialiseBuilder(CharSequence chars) {
 		return (new PredicateInitialiser(chars));
 	}
@@ -73,49 +74,70 @@ public class PredicateInitialiser extends PredicateBuilder {
 	 * "[" ~ "]".
 	 */
 	
-	/*************************************************************************/
-	/* The following are the specific initialisations of Predicate contexts. */
-	/*************************************************************************/
-	
-	//Boolean Constants
-	
-	public static final PredicateBooleanContext getTrueConstant() {
-		return PredicateBooleanContext.TRUE();
-	}
-	
-	public static final PredicateBooleanContext getFalseConstant() {
-		return PredicateBooleanContext.FALSE();
-	}
-	
 	//Get attribute wrapped to predicate
 	
+	/***
+	 * Converts an XPath Attribute into a predicate String context
+	 * @param xPathAttributeContext
+	 * @return PredicateStringContext
+	 */
 	public static final PredicateStringContext getAttributeAsString(XPathAttributeContext xPathAttributeContext) {
 		return new PredicateStringContext(xPathAttributeContext);
 	}
 	
+	/***
+	 * Converts an XPath Attribute into a predicate Number context
+	 * @param xPathAttributeContext
+	 * @return PredicateStringContext
+	 */
 	public static final PredicateNumberContext getAttributeAsNumber(XPathAttributeContext xPathAttributeContext) {
 		return new PredicateNumberContext(xPathAttributeContext);
 	}
 	
 	//Get primitive types wrapped to predicate
 	
+	/***
+	 * Proctor's the java object "String" to a predicate "StringContext" type
+	 * @param words
+	 * @return PredicateStringContext
+	 */
 	public static final PredicateStringContext getStringLiteralAsPredicate(String words) {
 		return new PredicateStringContext(words);
 	}
-	
+
+	/***
+	 * Proctor's the java literal "int" to a predicate "NumberContext" type
+	 * @param number
+	 * @return PredicateNumberContext
+	 */
 	public static final PredicateNumberContext getIntegerLiteralAsPredicate(int number) {
 		return new PredicateNumberContext(number);
 	}
-	
-	public static final PredicateNumberContext getLongLiteralAsPredicate(int number) {
+
+	/***
+	 * Proctor's the java literal "long" to a predicate "NumberContext" type
+	 * @param number
+	 * @return PredicateNumberContext
+	 */
+	public static final PredicateNumberContext getLongLiteralAsPredicate(long number) {
 		return new PredicateNumberContext(number);
 	}
-	
-	public static final PredicateNumberContext getFloatLiteralAsPredicate(int number) {
+
+	/***
+	 * Proctor's the java literal "float" to a predicate "NumberContext" type
+	 * @param number
+	 * @return PredicateNumberContext
+	 */
+	public static final PredicateNumberContext getFloatLiteralAsPredicate(float number) {
 		return new PredicateNumberContext(number);
 	}
-	
-	public static final PredicateNumberContext getDoubleLiteralAsPredicate(int number) {
+
+	/***
+	 * Proctor's the java literal "double" to a predicate "NumberContext" type
+	 * @param number
+	 * @return PredicateNumberContext
+	 */
+	public static final PredicateNumberContext getDoubleLiteralAsPredicate(double number) {
 		return new PredicateNumberContext(number);
 	}
 	
@@ -123,14 +145,29 @@ public class PredicateInitialiser extends PredicateBuilder {
 	/* The following are the wrappers from any predicate builder to a type.  */
 	/*************************************************************************/
 	
+	/***
+	 * Wraps any PredicateBuilder in the xpath cast function "string(*)"
+	 * @param predicateBuilder
+	 * @return PredicateStringContext
+	 */
 	public static final PredicateStringContext wrapAPredicateToStringType(PredicateBuilder predicateBuilder) {
 		return new PredicateStringContext(predicateBuilder);
 	}
-	
+
+	/***
+	 * Wraps any PredicateBuilder in the xpath cast function "number(*)"
+	 * @param predicateBuilder
+	 * @return PredicateNumberContext
+	 */
 	public static final PredicateNumberContext wrapAPredicateToNumberType(PredicateBuilder predicateBuilder) {
 		return new PredicateNumberContext(predicateBuilder);
 	}
-	
+
+	/***
+	 * Wraps any PredicateBuilder in the xpath cast function "boolean(*)"
+	 * @param predicateBuilder
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext wrapAPredicateToBooleanType(PredicateBuilder predicateBuilder) {
 		return new PredicateBooleanContext(predicateBuilder);
 	}
@@ -144,58 +181,128 @@ public class PredicateInitialiser extends PredicateBuilder {
 	/*The following is the simple implementation for a variety of predicates.*/
 	/*************************************************************************/
 	
+	/***
+	 * Takes the boolean inverse of a predicate
+	 * @param builder
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext NOT(PredicateBuilder builder) {
 		return initialiseBuilder()._NOT(builder);
 	}
-	
+
+	/***
+	 * Applies the boolean "or" across a range of predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext OR(PredicateBuilder... builders) {
 		return initialiseBuilder()._OR(builders);
 	}
-	
+
+	/***
+	 * Applies the boolean "and" across a range of predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext AND(PredicateBuilder... builders) {
 		return initialiseBuilder()._AND(builders);
 	}
-	
+
+	/***
+	 * Applies comparison "=" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext EQUALS(PredicateBuilder... builders) {
 		return initialiseBuilder()._EQUALS(builders);
 	}
-	
+
+	/***
+	 * Applies comparison "!=" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext NOTEQUALS(PredicateBuilder... builders) {
 		return initialiseBuilder()._NOTEQUALS(builders);
 	}
-	
+
+	/***
+	 * Applies comparison ">" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext GREATERTHAN(PredicateNumberContext... builders) {
 		return initialiseBuilder()._GREATERTHAN(builders);
 	}
-	
+
+	/***
+	 * Applies comparison ">=" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext GREATERTHANOREQUALTO(PredicateNumberContext... builders) {
 		return initialiseBuilder()._GREATERTHANOREQUALTO(builders);
 	}
-	
+
+	/***
+	 * Applies comparison "<" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext LESSTHAN(PredicateNumberContext... builders) {
 		return initialiseBuilder()._LESSTHAN(builders);
 	}
-	
+
+	/***
+	 * Applies comparison "<=" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	public static final PredicateBooleanContext LESSTHANOREQUALTO(PredicateNumberContext... builders) {
 		return initialiseBuilder()._LESSTHANOREQUALTO(builders);
 	}
-	
+
+	/***
+	 * Applies computation "+" across a range of adjacent predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	public static final PredicateNumberContext PLUS(PredicateNumberContext... numbers) {
 		return initialiseBuilder()._PLUS(numbers);
 	}
-	
+
+	/***
+	 * Applies computation "-" across a range of adjacent ordered predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	public static final PredicateNumberContext MINUS(PredicateNumberContext... numbers) {
 		return initialiseBuilder()._MINUS(numbers);
 	}
-	
+
+	/***
+	 * Applies computation "*" across a range of adjacent predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	public static final PredicateNumberContext MULTIPLY(PredicateNumberContext... numbers) {
 		return initialiseBuilder()._MULTIPLY(numbers);
 	}
-	
+
+	/***
+	 * Applies computation "div" across a range of adjacent ordered predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	public static final PredicateNumberContext DIVIDE(PredicateNumberContext... numbers) {
 		return initialiseBuilder()._DIVIDE(numbers);
 	}
-	
+
+	/***
+	 * Applies computation "mod" across a range of adjacent ordered predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	public static final PredicateNumberContext MODULO(PredicateNumberContext... numbers) {
 		return initialiseBuilder()._MODULO(numbers);
 	}

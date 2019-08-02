@@ -9,6 +9,10 @@ import com.skenvy.fluent.BuildableContext;
  */
 public class XPathAttributeContext extends XPathBuilder implements BuildableContext {
 
+	/*************************************************************************/
+	/*                      Constructor and buildability                     */
+	/*************************************************************************/
+	
 	/***
 	 * Create a new XPathBuilder subclass that refers to an existing instance
 	 * of the XPathBuilder as the superclass to the context class that brought

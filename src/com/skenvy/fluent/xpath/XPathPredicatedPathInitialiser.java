@@ -1,13 +1,13 @@
 package com.skenvy.fluent.xpath;
 
-//TODO//Needed?/import com.skenvy.fluent.xpath.contextualisers.XPathAttributeContextualisers;
 import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
 
-/*** TODO (Better explain how this is used by the XPathInitialiser..)
- * The builder's "initialiser" used to initialise the XPath builder with any of
- * a number of appropriate ways to start an XPath ; Rescoped to specifically
- * initialise paths with axis' other than "descendant, child, or current
- * context" that are refined to being in the "current context"
+/***
+ * The XPathInitialiser's "initialiser" used to initialise the XPath builder 
+ * with any of a number of appropriate ways to start an XPath ; Rescoped to 
+ * specifically initialise paths with axis' other than "descendant, child, or 
+ * current context" that are refined to being in the "current context", if we
+ * need to initialise an XPath inside of a non-top-level (predicated) context.
  */
 public class XPathPredicatedPathInitialiser extends XPathBuilder implements XPathAxisContextualisers {
 

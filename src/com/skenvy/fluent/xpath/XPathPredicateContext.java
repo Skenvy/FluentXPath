@@ -3,6 +3,7 @@ package com.skenvy.fluent.xpath;
 import com.skenvy.fluent.BuildableContext;
 import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
 import com.skenvy.fluent.xpath.contextualisers.XPathPredicateContextualisers;
+import com.skenvy.fluent.xpath.predicates.BuildablePredicate;
 
 /***
  * A collection of interfaces that describe functions that can be applied to 
@@ -10,6 +11,10 @@ import com.skenvy.fluent.xpath.contextualisers.XPathPredicateContextualisers;
  * inner class' method chained construction be a predicate component.
  */
 public class XPathPredicateContext extends XPathBuilder implements BuildableContext, XPathAxisContextualisers, XPathPredicateContextualisers, NodeSetContext {
+	
+	/*************************************************************************/
+	/*                      Constructor and buildability                     */
+	/*************************************************************************/
 	
 	/***
 	 * Create a new XPathBuilder subclass that refers to an existing instance
@@ -24,6 +29,10 @@ public class XPathPredicateContext extends XPathBuilder implements BuildableCont
 	public String buildToString() {
 		return _buildToString();
 	}
+	
+	/*************************************************************************/
+	/*                  XPathAxisContextualisers @Override's                 */
+	/*************************************************************************/
 
 	@Override
 	public XPathAxisContext withAncestor() {
@@ -89,11 +98,28 @@ public class XPathPredicateContext extends XPathBuilder implements BuildableCont
 	public XPathAttributeContext withAttribute(String attributeName) {
 		return _withAttribute(attributeName);
 	}
+	
+	/*************************************************************************/
+	/*                       NodeSetContext @Override's                      */
+	/*************************************************************************/
 
 	@Override
 	public String buildTheNodeSetToString() {
 		return _buildTheNodeSetToString();
 	}
 
+	@Override
+	public XPathNodeContext wrapAMultiNodeSetContextIntoASingleNodeSetContext() {
+		return _wrapAMultiNodeSetContextIntoASingleNodeSetContext();
+	}
+	
+	/*************************************************************************/
+	/*                XPathPredicateContextualisers @Override's              */
+	/*************************************************************************/
+
+	@Override
+	public XPathPredicateContext withCustomPredicate(BuildablePredicate predicate) {
+		return _withCustomPredicate(predicate);
+	}
 
 }

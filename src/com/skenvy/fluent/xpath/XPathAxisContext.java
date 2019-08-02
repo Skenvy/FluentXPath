@@ -10,6 +10,10 @@ import com.skenvy.fluent.xpath.contextualisers.XPathNodeContextualisers;
  */
 public class XPathAxisContext extends XPathBuilder implements NotBuildableContext, XPathNodeContextualisers {
 
+	/*************************************************************************/
+	/*                      Constructor and buildability                     */
+	/*************************************************************************/
+	
 	/***
 	 * Create a new XPathBuilder subclass that refers to an existing instance
 	 * of the XPathBuilder as the superclass to the context class that brought
@@ -23,6 +27,10 @@ public class XPathAxisContext extends XPathBuilder implements NotBuildableContex
 	public void whyIsntThisABuildableContext() {
 		_whyIsntThisABuildableContext();
 	}
+	
+	/*************************************************************************/
+	/*                  XPathNodeContextualisers @Override's                 */
+	/*************************************************************************/
 
 	@Override
 	public XPathNodeContext nodeOfAnyType() {

@@ -3,6 +3,7 @@ package com.skenvy.fluent.xpath;
 import com.skenvy.fluent.xpath.contextualisers.XPathAttributeContextualisers;
 import com.skenvy.fluent.xpath.contextualisers.XPathAxisContextualisers;
 import com.skenvy.fluent.xpath.contextualisers.XPathNodeContextualisers;
+import com.skenvy.fluent.xpath.predicates.BuildablePredicate;
 
 /***
  * The contextless builder. Subclassed by the "context aware" builder facades.
@@ -216,24 +217,27 @@ public abstract class XPathBuilder {
 	/***
 	 * Interactions with the shared inner class: Append to the StringBuilder
 	 */
-	/*Package Private*/ final void appendStringBuilder(CharSequence chars) {
+	/*Package Private*/ final XPathBuilder appendStringBuilder(CharSequence chars) {
 		this.xPathBuilderInner.stringBuilder.append(chars);
+		return this;
 	}
 	
 	/***
 	 * Interactions with the shared inner class: Prepend to the StringBuilder
 	 */
-	/*Package Private*/ final void prependStringBuilder(CharSequence chars){
+	/*Package Private*/ final XPathBuilder prependStringBuilder(CharSequence chars){
 		this.xPathBuilderInner.stringBuilder.insert(0, chars);
+		return this;
 	}
 	
 	/***
 	 * Interactions with the shared inner class: Wrap to the StringBuilder
 	 */
-	/*Package Private*/ final void wrapTheStringBuilder(CharSequence append,
+	/*Package Private*/ final XPathBuilder wrapTheStringBuilder(CharSequence append,
 												        CharSequence prepend) {
 		prependStringBuilder(prepend);
 		appendStringBuilder(append);
+		return this;
 	}
 	
 	/*
@@ -285,12 +289,24 @@ public abstract class XPathBuilder {
 	
 	/***
 	 * Deduplication of the functionality of the interface method {@code 
-	 * (new <? implements BuildableContext>).buildToString();
+	 * (new <? implements NodeSetContext>).buildTheNodeSetToString();
 	 * }
 	 * @return String
 	 */
 	/*Package Private*/ final String _buildTheNodeSetToString() {
-		return this._buildToString();
+		return _buildToString();
+	}
+	
+	/***
+	 * Deduplication of the functionality of the interface method {@code 
+	 * (new <? implements NodeSetContext>).
+	 * wrapAMultiNodeSetContextIntoASingleNodeSetContext();
+	 * }
+	 * @return String
+	 */
+	/*Package Private*/ final XPathNodeContext 
+	                     _wrapAMultiNodeSetContextIntoASingleNodeSetContext() {
+		return wrapTheStringBuilder("(", ")").swapToNodeContext();
 	}
 	
 	/*************************************************************************/
@@ -579,8 +595,7 @@ public abstract class XPathBuilder {
 	 * Deduplication of the functionality of the interface method {@code 
 	 * (new <? implements XPathNodeContextualisers>).nodeOfAnyType();
 	 * }
-	 * @param attributeName
-	 * @return XPathAttributeContext
+	 * @return XPathNodeContext
 	 */
 	/*Package Private*/ final XPathNodeContext _nodeOfAnyType() {
 		appendStringBuilder(XPathNodeContextualisers.nodeWildcard);
@@ -591,8 +606,8 @@ public abstract class XPathBuilder {
 	 * Deduplication of the functionality of the interface method {@code 
 	 * (new <? implements XPathNodeContextualisers>).nodeOfType(String 
 	 * nodeType);}
-	 * @param attributeName
-	 * @return XPathAttributeContext
+	 * @param nodeType
+	 * @return XPathNodeContext
 	 */
 	/*Package Private*/ final XPathNodeContext _nodeOfType(String nodeType) {
 		appendStringBuilder(nodeType);
@@ -603,8 +618,8 @@ public abstract class XPathBuilder {
 	 * Deduplication of the functionality of the interface method {@code 
 	 * (new <? implements XPathNodeContextualisers>).nodeLineage(String... 
 	 * nodeTypes);}
-	 * @param attributeName
-	 * @return XPathAttributeContext
+	 * @param nodeTypes
+	 * @return XPathNodeContext
 	 */
 	/*Package Private*/ final XPathNodeContext 
 	                                        _nodeLineage(String... nodeTypes) {
@@ -622,7 +637,19 @@ public abstract class XPathBuilder {
 	/* Subclass Contextualiser's function deduplication : Predicate Context  */
 	/*************************************************************************/
 	
-	
+	/***
+	 * Deduplication of the functionality of the interface method {@code 
+	 * (new <? implements XPathPredicateContextualisers>).withCustomPredicate(
+	 * PredicateBuilder predicate);}
+	 * @param predicate
+	 * @return XPathPredicateContext
+	 */
+	/*Package Private*/ final XPathPredicateContext _withCustomPredicate(
+			                                    BuildablePredicate predicate) {
+		return appendStringBuilder("[").
+				appendStringBuilder(predicate.buildToString()).
+				appendStringBuilder("]").swapToPredicateContext();
+	}
 	
 	/*************************************************************************/
 	/* Subclass Contextualiser's function deduplication : Attribute Context  */

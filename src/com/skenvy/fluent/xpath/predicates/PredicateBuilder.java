@@ -276,80 +276,172 @@ public abstract class PredicateBuilder {
 	}
 	
 	/*************************************************************************/
-	/*The following is the simple implementation for a variety of predicates.*/
+	/*The following is the implementation of N-ary input predicate operations*/
 	/*************************************************************************/
 	
-	private final PredicateBuilder _iterateWrapSeparator(String seperator, PredicateBuilder... builders) {
+	/***
+	 * Wraps combining multiple builder's internal contents, with a separator
+	 * @param seperator
+	 * @param builders
+	 * @return PredicateBuilder
+	 */
+	private final PredicateBuilder _iterateWrapSeparator(String separator, 
+			                                    PredicateBuilder... builders) {
 		appendStringBuilder("(");
 		for(int k = 0; k < builders.length-1; k++) {
-			appendStringBuilder("("+builders[k]._buildToString()+")"+seperator);
+			appendStringBuilder("(");
+			appendStringBuilder(builders[k]);
+			appendStringBuilder(")"+separator);
 		}
-		appendStringBuilder("("+builders[builders.length-1]._buildToString()+"))");
+		appendStringBuilder("(");
+		appendStringBuilder(builders[builders.length-1]);
+		appendStringBuilder("))");
 		return this;
 	}
-	
-	private final PredicateBuilder _iterateWrapComparator(String comparator, PredicateBuilder... builders) {
+
+	/***
+	 * Wraps comparing adjacent inputs with some given comparator string
+	 * @param comparator
+	 * @param builders
+	 * @return PredicateBuilder
+	 */
+	private final PredicateBuilder _iterateWrapComparator(String comparator, 
+			                                    PredicateBuilder... builders) {
 		appendStringBuilder("(");
 		for(int k = 0; k < builders.length-1; k++) {
-			appendStringBuilder("(("+builders[k]._buildToString()+")"+comparator+"("+builders[k+1]._buildToString()+"))");
+			appendStringBuilder("((");
+			appendStringBuilder(builders[k]);
+			appendStringBuilder(")"+comparator+"(");
+			appendStringBuilder(builders[k+1]);
+			appendStringBuilder("))");
 		}
 		appendStringBuilder(")");
 		return this;
 	}
-	
+
+	/***
+	 * Takes the boolean inverse of a predicate
+	 * @param builder
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _NOT(PredicateBuilder builder) {
 		appendStringBuilder("(not("+builder._buildToString()+"))");
 		return swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies the boolean "or" across a range of predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _OR(PredicateBuilder... builders) {
 		return _iterateWrapSeparator(" or ",builders).swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies the boolean "and" across a range of predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _AND(PredicateBuilder... builders) {
 		return _iterateWrapSeparator(" and ",builders).swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies comparison "=" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _EQUALS(PredicateBuilder... builders) {
 		return _iterateWrapComparator("=",builders).swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies comparison "!=" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _NOTEQUALS(PredicateBuilder... builders) {
 		return _iterateWrapComparator("!=",builders).swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies comparison ">" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _GREATERTHAN(PredicateBuilder... builders) {
 		return _iterateWrapComparator(">",builders).swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies comparison ">=" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _GREATERTHANOREQUALTO(PredicateBuilder... builders) {
 		return _iterateWrapComparator(">=",builders).swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies comparison "<" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _LESSTHAN(PredicateBuilder... builders) {
 		return _iterateWrapComparator("<",builders).swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies comparison "<=" across a range of adjacent ordered predicates
+	 * @param builders
+	 * @return PredicateBooleanContext
+	 */
 	protected final PredicateBooleanContext _LESSTHANOREQUALTO(PredicateBuilder... builders) {
 		return _iterateWrapComparator("<=",builders).swapToBooleanContext();
 	}
-	
+
+	/***
+	 * Applies computation "+" across a range of adjacent predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	protected final PredicateNumberContext _PLUS(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator("+",numbers).swapToNumberContext();
 	}
-	
+
+	/***
+	 * Applies computation "-" across a range of adjacent ordered predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	protected final PredicateNumberContext _MINUS(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator("-",numbers).swapToNumberContext();
 	}
-	
+
+	/***
+	 * Applies computation "*" across a range of adjacent predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	protected final PredicateNumberContext _MULTIPLY(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator("*",numbers).swapToNumberContext();
 	}
-	
+
+	/***
+	 * Applies computation "div" across a range of adjacent ordered predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	protected final PredicateNumberContext _DIVIDE(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator(" div ",numbers).swapToNumberContext();
 	}
-	
+
+	/***
+	 * Applies computation "mod" across a range of adjacent ordered predicates
+	 * @param numbers
+	 * @return PredicateNumberContext
+	 */
 	protected final PredicateNumberContext _MODULO(PredicateNumberContext... numbers) {
 		return _iterateWrapSeparator(" mod ",numbers).swapToNumberContext();
 	}

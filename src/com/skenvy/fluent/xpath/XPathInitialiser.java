@@ -173,7 +173,7 @@ public class XPathInitialiser extends XPathBuilder {
 	}
 	
 	/***
-	 * Returns an initialiaser that provides fluent access to all relative axis
+	 * Returns an initialiser that provides fluent access to all relative axis
 	 * beyond the "descendant, child, and current context"; such that relative
 	 * axis may be utilised in predicates that include references to other
 	 * nodes located relative to the node being predicated. Note that if you 
